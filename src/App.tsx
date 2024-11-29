@@ -21,12 +21,12 @@ function App() {
     () => useRandomLetter(correctWordArray),
     []
   );
-  // ****** might be able to use a reducer and make it work with the setUserInputArray by using imperativeHandle
-  const ref = useRef([""]);
-  const [userInputArray, setUserInputArray] = useState(ref.current);
-  useEffect(() => {
-    setUserInputArray(ref.current);
-  }, [ref.current]);
+  // ****** might be able to use a ref and make it work with the setUserInputArray by using imperativeHandle
+  // const ref = useRef([""]);
+  const [userInputArray, setUserInputArray] = useState([""]);
+  // useEffect(() => {
+  //   setUserInputArray(ref.current);
+  // }, []);
   //refactoring the userInput array
   const slicedUserInputArray = userInputArray.slice(1, userInputArray.length);
   //removing the random word from the correct answer
@@ -58,9 +58,9 @@ function App() {
       <section className="letters">
         {/* rendering letters */}
         <Letters
-          // setUserInputArray={setUserInputArray}
+          setUserInputArray={setUserInputArray}
           filteredCorrectWord={filteredCorrectWord}
-          ref={ref}
+          // ref={ref}
         />
       </section>
     </>

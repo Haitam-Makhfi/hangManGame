@@ -1,13 +1,13 @@
-import { useCallback, forwardRef } from "react";
+import { useCallback } from "react";
 
 type propType = {
   setUserInputArray?: any;
   filteredCorrectWord: string[];
 };
 
-const Letters = (props: propType, ref: any) => {
-  const filteredCorrectWord = props.filteredCorrectWord;
-  // const { setUserInputArray, filteredCorrectWord } = props;
+const Letters = (props: propType) => {
+  // const filteredCorrectWord = props.filteredCorrectWord;
+  const { setUserInputArray, filteredCorrectWord } = props;
   const letters: string[] = [
     "A",
     "B",
@@ -94,8 +94,8 @@ const Letters = (props: propType, ref: any) => {
           break;
         }
         array[i].count--;
-        // setUserInputArray((pv: string[]) => [...pv, letter]); //****re-render probleme
-        ref.current = [...ref.current, letter];
+        setUserInputArray((pv: string[]) => [...pv, letter]); //****re-render probleme
+        // ref.current = [...ref.current, letter];
       }
     }
     console.log(globalArray());
@@ -112,4 +112,4 @@ const Letters = (props: propType, ref: any) => {
     </>
   );
 };
-export default forwardRef(Letters);
+export default Letters;
