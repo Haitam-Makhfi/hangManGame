@@ -5,7 +5,7 @@ import arm from "./images/arm.png";
 import rightLeg from "./images/rightLeg.png";
 import leftLeg from "./images/leftLeg.png";
 import ImageList from "./components/ImageList";
-import Letters from "./components/Letters";
+import LettersComponent from "./components/Letters";
 import GenerateSlote from "./components/GenerateSlote.js";
 import Cortect from "./components/Cortect.tsx";
 import False from "./components/False.tsx";
@@ -53,7 +53,7 @@ function App() {
       </div>
       <section className="letters">
         {/* rendering letters */}
-        <Letters
+        <LettersComponent
           setUserInputArray={setUserInputArray}
           filteredCorrectWord={filteredCorrectWord}
           // ref={ref}

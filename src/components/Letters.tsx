@@ -5,7 +5,7 @@ type propType = {
   filteredCorrectWord: string[];
 };
 
-const Letters = (props: propType) => {
+const LettersComponent = (props: propType) => {
   // const filteredCorrectWord = props.filteredCorrectWord;
   const { setUserInputArray, filteredCorrectWord } = props;
   const letters: string[] = [
@@ -43,26 +43,26 @@ const Letters = (props: propType) => {
     e.target.style.cursor = "not-allowed";
   }
   // iterate through filteredCorrectWord and count letter instances
-  // *** counts the same letters 2 times
-  function letterCountArray() {
-    console.log(filteredCorrectWord);
-    return filteredCorrectWord.map((letter, index) => {
+  function letterCountArray(): { letter: string; count: number }[] {
+    const array = filteredCorrectWord;
+    filteredCorrectWord.map((letter, index) => {
       let count = 1;
       for (let i = 0; i < filteredCorrectWord.length; i++) {
         if (letter === filteredCorrectWord[i] && i !== index) {
           count++;
-          filteredCorrectWord.splice(i, 1);
+          array.splice(i, 1);
+          // filteredCorrectWord.splice(i, 1); cant do that
         }
+        array[i] = { letter, count };
       }
-      return { letter, count };
     });
+    return array;
   }
   console.log(letterCountArray());
-  console.log(letterCountArray().length);
 
-  //
+  // syncing the amouts of tries that the user has for each letter
   function globalArray() {
-    const array: any = letterCountArray();
+    const array: { letter: string; count: number }[] = letterCountArray();
     return letters.map((letter) => {
       let object;
       for (let i = 0; i < array.length; i++) {
@@ -99,11 +99,9 @@ const Letters = (props: propType) => {
       if (array[i].letter == letter) {
         if (array[i].count === 0) {
           disableButton(e);
-          break;
         }
         array[i].count--;
         setUserInputArray((pv: string[]) => [...pv, letter]); //****re-render probleme
-        // ref.current = [...ref.current, letter];
       }
     }
     console.log(globalArray());
@@ -120,4 +118,4 @@ const Letters = (props: propType) => {
     </>
   );
 };
-export default Letters;
+export default LettersComponent;
