@@ -22,11 +22,7 @@ function App() {
     []
   );
   // ****** might be able to use a ref and make it work with the setUserInputArray by using imperativeHandle
-  // const ref = useRef([""]);
   const [userInputArray, setUserInputArray] = useState([""]);
-  // useEffect(() => {
-  //   setUserInputArray(ref.current);
-  // }, []);
   //refactoring the userInput array
   const slicedUserInputArray = userInputArray.slice(1, userInputArray.length);
   //removing the random word from the correct answer

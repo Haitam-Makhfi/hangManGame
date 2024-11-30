@@ -43,18 +43,26 @@ const Letters = (props: propType) => {
     e.target.style.cursor = "not-allowed";
   }
   // iterate through filteredCorrectWord and count letter instances
+  // *** counts the same letters 2 times
   function letterCountArray() {
-    return filteredCorrectWord.map((letter) => {
-      let count = 0;
+    console.log(filteredCorrectWord);
+    return filteredCorrectWord.map((letter, index) => {
+      let count = 1;
       for (let i = 0; i < filteredCorrectWord.length; i++) {
-        letter === filteredCorrectWord[i] && count++;
+        if (letter === filteredCorrectWord[i] && i !== index) {
+          count++;
+          filteredCorrectWord.splice(i, 1);
+        }
       }
       return { letter, count };
     });
   }
+  console.log(letterCountArray());
+  console.log(letterCountArray().length);
+
   //
   function globalArray() {
-    const array = letterCountArray();
+    const array: any = letterCountArray();
     return letters.map((letter) => {
       let object;
       for (let i = 0; i < array.length; i++) {
