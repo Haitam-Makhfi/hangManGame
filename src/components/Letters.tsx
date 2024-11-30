@@ -43,22 +43,26 @@ const LettersComponent = (props: propType) => {
     e.target.style.cursor = "not-allowed";
   }
   // iterate through filteredCorrectWord and count letter instances
-  function letterCountArray(): { letter: string; count: number }[] {
-    const array = filteredCorrectWord;
-    filteredCorrectWord.map((letter, index) => {
+  function letterCountArray() {
+    const array = filteredCorrectWord.map((letter, index) => {
       let count = 1;
       for (let i = 0; i < filteredCorrectWord.length; i++) {
         if (letter === filteredCorrectWord[i] && i !== index) {
           count++;
-          array.splice(i, 1);
-          // filteredCorrectWord.splice(i, 1); cant do that
         }
-        array[i] = { letter, count };
+      }
+      return { letter, count };
+    });
+    const result = array;
+    array.map((object, index) => {
+      for (let i = 0; i < array.length; i++) {
+        if (object.letter === array[i].letter && i !== index) {
+          result.splice(index, 1);
+        }
       }
     });
-    return array;
+    return result;
   }
-  console.log(letterCountArray());
 
   // syncing the amouts of tries that the user has for each letter
   function globalArray() {
