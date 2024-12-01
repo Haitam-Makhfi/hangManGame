@@ -42,8 +42,27 @@ const LettersComponent = (props: propType) => {
     e.target.style.disabled = true;
     e.target.style.cursor = "not-allowed";
   }
-  // iterate through filteredCorrectWord and count letter instances
+
+  // iterate through filteredCorrectWord and count letter instances and finally return an array of objects that has the letter and the number of instances
   function letterCountArray() {
+    // const array = [...filteredCorrectWord];
+    // console.log(array);
+    // filteredCorrectWord.forEach((letter, index) => {
+    //   let count = 1;
+    //   let obj;
+    //   for (let i = 0; i < filteredCorrectWord.length; i++) {
+    //     if (letter === filteredCorrectWord[i] && i !== index) {
+    //       count++;
+    //       array.splice(i, 1);
+    //       obj = { letter, count };
+    //     } else {
+    //       obj = { letter, count };
+    //     }
+    //   }
+    //   array[index] = obj;
+    // });
+    // return array;
+    // ********************
     const array = filteredCorrectWord.map((letter, index) => {
       let count = 1;
       for (let i = 0; i < filteredCorrectWord.length; i++) {
@@ -54,16 +73,16 @@ const LettersComponent = (props: propType) => {
       return { letter, count };
     });
     const result = array;
-    array.map((object, index) => {
+    array.forEach((object, index) => {
       for (let i = 0; i < array.length; i++) {
         if (object.letter === array[i].letter && i !== index) {
-          result.splice(index, 1);
+          result.splice(i, 1);
         }
       }
     });
     return result;
   }
-
+  console.log(letterCountArray());
   // syncing the amouts of tries that the user has for each letter
   function globalArray() {
     const array: { letter: string; count: number }[] = letterCountArray();
@@ -80,22 +99,6 @@ const LettersComponent = (props: propType) => {
     });
   }
   // updates the state of the object.count in globalArray, the userInput array and it disables the element and change it's styles make it solid tho
-  // function handelClick(letter: string, e: any) {
-  //   console.log(globalArray());
-  //   const array: any = globalArray();
-  //   for (let i = 0; i < array.length; i++) {
-  //     if (array[i].letter == letter) {
-  //       if (array[i].count === 0) {
-  //         disableButton(e);
-  //         break;
-  //       }
-  //       array[i].count--;
-  //       setUserInputArray((pv: string[]) => [...pv, letter]); //rerender probleme
-  //     }
-  //   }
-  //   console.log(globalArray());
-  // }
-  // ********************
   const handelClick = useCallback((letter: string, e: any) => {
     console.log(globalArray());
     const array: any = globalArray();
