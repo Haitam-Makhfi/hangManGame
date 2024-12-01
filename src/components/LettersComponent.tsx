@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, memo } from "react";
 
 type propType = {
   setUserInputArray?: any;
@@ -82,36 +82,32 @@ const LettersComponent = (props: propType) => {
     });
     return result;
   }
-  console.log(letterCountArray());
+
   // syncing the amouts of tries that the user has for each letter
   function globalArray() {
-    const array: { letter: string; count: number }[] = letterCountArray();
+    const array: { letter: string; count: number }[] = [...letterCountArray()];
     return letters.map((letter) => {
-      let object;
       for (let i = 0; i < array.length; i++) {
         if (letter === array[i].letter) {
-          object = { letter, count: array[i].count };
-        } else {
-          object = { letter, count: 1 };
+          return { letter, count: array[i].count };
         }
       }
-      return object;
+      return { letter, count: 1 };
     });
   }
   // updates the state of the object.count in globalArray, the userInput array and it disables the element and change it's styles make it solid tho
   const handelClick = useCallback((letter: string, e: any) => {
-    console.log(globalArray());
     const array: any = globalArray();
     for (let i = 0; i < array.length; i++) {
       if (array[i].letter == letter) {
         if (array[i].count === 0) {
           disableButton(e);
+          break;
         }
         array[i].count--;
         setUserInputArray((pv: string[]) => [...pv, letter]); //****re-render probleme
       }
     }
-    console.log(globalArray());
   }, []);
   return (
     <>
@@ -125,4 +121,4 @@ const LettersComponent = (props: propType) => {
     </>
   );
 };
-export default LettersComponent;
+export default memo(LettersComponent);

@@ -5,13 +5,13 @@ import arm from "./images/arm.png";
 import rightLeg from "./images/rightLeg.png";
 import leftLeg from "./images/leftLeg.png";
 import ImageList from "./components/ImageList";
-import LettersComponent from "./components/Letters";
+import LettersComponent from "./components/LettersComponent.tsx";
 import GenerateSlote from "./components/GenerateSlote.js";
 import Cortect from "./components/Cortect.tsx";
 import False from "./components/False.tsx";
 import useRandomWord from "./hooks/useRandomWord.js";
 import useRandomLetter from "./hooks/useRandomLetter.js";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 function App() {
   const images = [hanger, head, torso, arm, arm, rightLeg, leftLeg];
   // selecting a random word
