@@ -45,47 +45,26 @@ const LettersComponent = (props: propType) => {
 
   // iterate through filteredCorrectWord and count letter instances and finally return an array of objects that has the letter and the number of instances
   function letterCountArray() {
-    // const array = [...filteredCorrectWord];
-    // console.log(array);
-    // filteredCorrectWord.forEach((letter, index) => {
-    //   let count = 1;
-    //   let obj;
-    //   for (let i = 0; i < filteredCorrectWord.length; i++) {
-    //     if (letter === filteredCorrectWord[i] && i !== index) {
-    //       count++;
-    //       array.splice(i, 1);
-    //       obj = { letter, count };
-    //     } else {
-    //       obj = { letter, count };
-    //     }
-    //   }
-    //   array[index] = obj;
-    // });
-    // return array;
-    // ********************
-    const array = filteredCorrectWord.map((letter, index) => {
-      let count = 1;
-      for (let i = 0; i < filteredCorrectWord.length; i++) {
-        if (letter === filteredCorrectWord[i] && i !== index) {
-          count++;
-        }
-      }
-      return { letter, count };
-    });
-    const result = array;
-    array.forEach((object, index) => {
-      for (let i = 0; i < array.length; i++) {
-        if (object.letter === array[i].letter && i !== index) {
-          result.splice(i, 1);
-        }
-      }
-    });
-    return result;
-  }
+    const letterCounts: any = {};
 
+    for (const letter of filteredCorrectWord) {
+      if (letterCounts[letter]) {
+        letterCounts[letter]++;
+      } else {
+        letterCounts[letter] = 1;
+      }
+    }
+
+    const resultArray = Object.entries(letterCounts).map(([letter, count]) => ({
+      letter,
+      count,
+    }));
+
+    return resultArray;
+  }
   // syncing the amouts of tries that the user has for each letter
   function globalArray() {
-    const array: { letter: string; count: number }[] = [...letterCountArray()];
+    const array: any = [...letterCountArray()];
     return letters.map((letter) => {
       for (let i = 0; i < array.length; i++) {
         if (letter === array[i].letter) {
