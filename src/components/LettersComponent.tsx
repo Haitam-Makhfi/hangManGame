@@ -46,7 +46,6 @@ const LettersComponent = (props: propType) => {
   // iterate through filteredCorrectWord and count letter instances and finally return an array of objects that has the letter and the number of instances
   function letterCountArray() {
     const letterCounts: any = {};
-
     for (const letter of filteredCorrectWord) {
       if (letterCounts[letter]) {
         letterCounts[letter]++;
@@ -54,13 +53,10 @@ const LettersComponent = (props: propType) => {
         letterCounts[letter] = 1;
       }
     }
-
-    const resultArray = Object.entries(letterCounts).map(([letter, count]) => ({
+    return Object.entries(letterCounts).map(([letter, count]) => ({
       letter,
       count,
     }));
-
-    return resultArray;
   }
   // syncing the amouts of tries that the user has for each letter
   function globalArray() {
@@ -79,12 +75,12 @@ const LettersComponent = (props: propType) => {
     const array: any = globalArray();
     for (let i = 0; i < array.length; i++) {
       if (array[i].letter == letter) {
+        array[i].count--;
+        setUserInputArray((pv: string[]) => [...pv, letter]); //****re-render probleme
         if (array[i].count === 0) {
           disableButton(e);
           break;
         }
-        array[i].count--;
-        setUserInputArray((pv: string[]) => [...pv, letter]); //****re-render probleme
       }
     }
   }, []);
