@@ -1,3 +1,4 @@
+import React from "react";
 import Cortect from "./Cortect.tsx";
 import False from "./False.tsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,7 +9,7 @@ type propType = {
   filteredCorrectWord: string[];
   setNextWord: any;
 };
-export default function DisplayResult(props: propType) {
+function DisplayResult(props: propType, ref: any) {
   const { slicedUserInputArray, filteredCorrectWord, setNextWord } = props;
   if (slicedUserInputArray.length === filteredCorrectWord.length) {
     const array = Array.from(document.querySelectorAll("button"));
@@ -19,17 +20,19 @@ export default function DisplayResult(props: propType) {
       return (
         <section className="results">
           <Cortect />
-          <div className="next" onClick={() => setNextWord((nw: any) => !nw)}>
-            next
-            <FontAwesomeIcon icon={faArrowRight} />
-          </div>
         </section>
       );
     } else {
       return (
         <section className="results">
           <False />
-          <div className="next" onClick={() => setNextWord((nw: any) => !nw)}>
+          <div
+            className="next"
+            onClick={() => {
+              ref.current--;
+              setNextWord((nw: any) => !nw);
+            }}
+          >
             next
             <FontAwesomeIcon icon={faArrowRight} />
           </div>
@@ -38,3 +41,4 @@ export default function DisplayResult(props: propType) {
     }
   }
 }
+export default React.forwardRef(DisplayResult);

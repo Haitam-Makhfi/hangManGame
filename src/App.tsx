@@ -10,19 +10,22 @@ import GenerateSlote from "./components/GenerateSlote.js";
 import DisplayResult from "./components/DisplayResult.tsx";
 import useRandomWord from "./hooks/useRandomWord.js";
 import useRandomLetter from "./hooks/useRandomLetter.js";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 function App() {
   const images = [hanger, head, torso, arm, arm, rightLeg, leftLeg];
   // selecting a random word
   const [nextWord, setNextWord] = useState(true);
+  // const [count, setCount] = useState(3);
+  const ref = useRef(3);
   const correctAnswer: string = useMemo(() => useRandomWord(), [nextWord]);
-  console.log(correctAnswer);
+  console.log(ref.current);
   const correctWordArray: string[] = Array.from(correctAnswer);
   const randomletterIndex: number = useMemo(
     () => useRandomLetter(correctWordArray),
     [nextWord]
   );
   const [userInputArray, setUserInputArray] = useState([""]);
+  const [isGameOver, setIsGameOver] = useState(true);
   useEffect(() => {
     setUserInputArray([""]);
     const array = Array.from(document.querySelectorAll("span"));
@@ -42,37 +45,42 @@ function App() {
     <>
       <section className="ilustration-container">
         {/* rendering images */}
-        <ImageList images={images} />
+        <ImageList images={images} ref={ref} setIsGameOver={setIsGameOver} />
       </section>
       <DisplayResult
         setNextWord={setNextWord}
         slicedUserInputArray={slicedUserInputArray}
         filteredCorrectWord={filteredCorrectWord}
+        ref={ref}
       />
-      <div className="slots">
-        {/* generating slots for the random word selected */}
-        <GenerateSlote
-          userInputArray={userInputArray}
-          correctWordArray={correctWordArray}
-          randomletterIndex={randomletterIndex}
-        />
-      </div>
-      <section className="letters">
-        {/* rendering letters */}
-        {nextWord ? (
-          <LettersComponent
-            key={"a"}
-            setUserInputArray={setUserInputArray}
-            filteredCorrectWord={filteredCorrectWord}
-          />
-        ) : (
-          <LettersComponent
-            key={"b"}
-            setUserInputArray={setUserInputArray}
-            filteredCorrectWord={filteredCorrectWord}
-          />
-        )}
-      </section>
+      {isGameOver && (
+        <section className="game-controles">
+          <div className="slots">
+            {/* generating slots for the random word selected */}
+            <GenerateSlote
+              userInputArray={userInputArray}
+              correctWordArray={correctWordArray}
+              randomletterIndex={randomletterIndex}
+            />
+          </div>
+          <section className="letters">
+            {/* rendering letters */}
+            {nextWord ? (
+              <LettersComponent
+                key={"a"}
+                setUserInputArray={setUserInputArray}
+                filteredCorrectWord={filteredCorrectWord}
+              />
+            ) : (
+              <LettersComponent
+                key={"b"}
+                setUserInputArray={setUserInputArray}
+                filteredCorrectWord={filteredCorrectWord}
+              />
+            )}
+          </section>
+        </section>
+      )}
     </>
   );
 }

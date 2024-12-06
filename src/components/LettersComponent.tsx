@@ -1,9 +1,8 @@
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 
 type propType = {
   setUserInputArray?: any;
   filteredCorrectWord: string[];
-  // nextWord: number;
 };
 export function disableButton(e: any) {
   e.style.backgroundColor = "skyBlue";
@@ -70,9 +69,6 @@ const LettersComponent = (props: propType) => {
       return { letter, count: 1 };
     });
   }
-  // useEffect(()=>{
-
-  // },[nextWord])
   // updates the state of the object.count in globalArray, the userInput array and it disables the element and change it's styles make it solid tho
   const array: any = [...globalArray()];
   const handelClick = useCallback((letter: string, e: any) => {

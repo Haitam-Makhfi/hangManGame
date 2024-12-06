@@ -17,42 +17,42 @@ body {
   position: relative;
   margin-inline: auto;
 }
-img {
+.img0 {
   display: block;
 }
 
-img[aria-index="1"] {
+.img1 {
   width: 5rem;
   position: absolute;
   top: 4.8rem;
   left: 260px;
   z-index: 7;
 }
-img[aria-index="2"] {
+.img2 {
   position: absolute;
   top: 7.8rem;
   left: 245px;
   z-index: 6;
 }
-img[aria-index="rightArm"] {
+.img3 {
   width: 4rem;
   position: absolute;
   top: 8.3rem;
   left: 290px;
 }
-img[aria-index="4"] {
+.img4 {
   width: 4rem;
   position: absolute;
   top: 8.3rem;
   left: 236px;
 }
-img[aria-index="5"] {
+.img5 {
   width: 5.5rem;
   position: absolute;
   top: 11.2rem;
   left: 280px;
 }
-img[aria-index="6"] {
+.img6 {
   width: 5.5rem;
   position: absolute;
   top: 11.3rem;
@@ -130,6 +130,16 @@ span {
   font-weight: bold;
   padding: 0.5rem 1rem;
   border-bottom: solid;
+}
+.game-over {
+  width: 100%;
+  text-align: center;
+  font-size: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: red;
 }
 @keyframes voila {
   0% {
