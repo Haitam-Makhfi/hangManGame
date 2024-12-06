@@ -1,12 +1,12 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 
 type propType = {
   setUserInputArray?: any;
   filteredCorrectWord: string[];
+  // nextWord: number;
 };
 
 const LettersComponent = (props: propType) => {
-  // const filteredCorrectWord = props.filteredCorrectWord;
   const { setUserInputArray, filteredCorrectWord } = props;
   const letters: string[] = [
     "A",
@@ -70,6 +70,9 @@ const LettersComponent = (props: propType) => {
       return { letter, count: 1 };
     });
   }
+  // useEffect(()=>{
+
+  // },[nextWord])
   // updates the state of the object.count in globalArray, the userInput array and it disables the element and change it's styles make it solid tho
   const array: any = [...globalArray()];
   const handelClick = useCallback((letter: string, e: any) => {

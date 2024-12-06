@@ -78,6 +78,27 @@ img[aria-index="6"] {
 .false {
   color: tomato;
 }
+.results {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.next {
+  position: absolute;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  gap: 5px;
+  cursor: pointer;
+  animation: voila;
+  animation-duration: 500ms;
+}
+.next:hover {
+  border-bottom: solid 2px black;
+}
 .letters {
   width: 100%;
   display: flex;
@@ -95,7 +116,7 @@ button {
   background-color: black;
   color: #fff;
 }
-.result {
+.slots {
   width: 100%;
   display: flex;
   justify-content: center;
