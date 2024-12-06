@@ -56,7 +56,6 @@ function App() {
         <LettersComponent
           setUserInputArray={setUserInputArray}
           filteredCorrectWord={filteredCorrectWord}
-          // ref={ref}
         />
       </section>
     </>

@@ -1,4 +1,4 @@
-import { useCallback, memo } from "react";
+import { useCallback } from "react";
 
 type propType = {
   setUserInputArray?: any;
@@ -39,7 +39,7 @@ const LettersComponent = (props: propType) => {
   function disableButton(e: any) {
     e.target.style.backgroundColor = "skyBlue";
     e.target.style.color = "black";
-    e.target.style.disabled = true;
+    e.target.disabled = true;
     e.target.style.cursor = "not-allowed";
   }
 
@@ -71,12 +71,12 @@ const LettersComponent = (props: propType) => {
     });
   }
   // updates the state of the object.count in globalArray, the userInput array and it disables the element and change it's styles make it solid tho
+  const array: any = [...globalArray()];
   const handelClick = useCallback((letter: string, e: any) => {
-    const array: any = globalArray();
     for (let i = 0; i < array.length; i++) {
       if (array[i].letter == letter) {
         array[i].count--;
-        setUserInputArray((pv: string[]) => [...pv, letter]); //****re-render probleme
+        setUserInputArray((pv: string[]) => [...pv, letter]);
         if (array[i].count === 0) {
           disableButton(e);
           break;
@@ -96,4 +96,4 @@ const LettersComponent = (props: propType) => {
     </>
   );
 };
-export default memo(LettersComponent);
+export default LettersComponent;
