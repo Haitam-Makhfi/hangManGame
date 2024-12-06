@@ -5,6 +5,12 @@ type propType = {
   filteredCorrectWord: string[];
   // nextWord: number;
 };
+export function disableButton(e: any) {
+  e.style.backgroundColor = "skyBlue";
+  e.style.color = "black";
+  e.disabled = true;
+  e.style.cursor = "not-allowed";
+}
 
 const LettersComponent = (props: propType) => {
   const { setUserInputArray, filteredCorrectWord } = props;
@@ -36,12 +42,6 @@ const LettersComponent = (props: propType) => {
     "Y",
     "Z",
   ];
-  function disableButton(e: any) {
-    e.target.style.backgroundColor = "skyBlue";
-    e.target.style.color = "black";
-    e.target.disabled = true;
-    e.target.style.cursor = "not-allowed";
-  }
 
   // iterate through filteredCorrectWord and count letter instances and finally return an array of objects that has the letter and the number of instances
   function letterCountArray() {
@@ -81,7 +81,7 @@ const LettersComponent = (props: propType) => {
         array[i].count--;
         setUserInputArray((pv: string[]) => [...pv, letter]);
         if (array[i].count === 0) {
-          disableButton(e);
+          disableButton(e.target);
           break;
         }
       }
